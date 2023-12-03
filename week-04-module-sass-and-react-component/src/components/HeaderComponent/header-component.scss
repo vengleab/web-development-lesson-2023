@@ -1,0 +1,18 @@
+$main-color: #bf7b7b;
+
+.header {
+  width: 100px;
+
+  &-item {
+    padding: 5px;
+  }
+
+  .header-item:hover {
+    background-color: $main-color;
+    cursor: pointer;
+  }
+}
+
+.item {
+
+}
