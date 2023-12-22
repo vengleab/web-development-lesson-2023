@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+
+.body {
+  flex: 4
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+}

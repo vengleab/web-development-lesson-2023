@@ -1,0 +1,35 @@
+.my-button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: blue;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  border-radius: 16px;
+  /* border: 1px solid black; */
+}
+
+.my-button:hover {
+  background-color: #b9c8cb;
+}
+
+
+.item {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+
+.item:hover {
+  background-color: #b9c8cb;
+  cursor: pointer;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
