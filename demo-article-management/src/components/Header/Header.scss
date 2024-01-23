@@ -1,0 +1,35 @@
+.header {
+  height: 30px;
+  
+  // border-color: black;
+  // background-color: gray;
+
+  div {
+    float: left;
+    margin: 10px;
+    border-bottom: black solid 5px;
+    /* margin: 5px; */
+    height: 100%;
+
+    &:hover {
+      cursor: pointer;
+      // background-color: gray;
+      color: red;
+      border-radius: 10px;
+    }
+      
+  }
+}
+
+// .header div {
+//   float: left;
+//   padding: 10px;
+//   /* margin: 5px; */
+//   height: 100%;
+// }
+
+// .header div:hover {
+  // cursor: pointer;
+  // background-color: white;
+  // border-radius: 10px;
+// }
