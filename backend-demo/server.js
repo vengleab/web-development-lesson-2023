@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
 })
 app.get("/about-us", (req, res) => {
     // res.send({ "message" : "Hello World!" });
-    res.render("template", { payload : "about data"});
+    res.render("template", { payload : "about datafdskfjdslkjflkdsjflkdsjfdsfdsfd"});
 })
 
 
