@@ -1,6 +1,8 @@
 const authRoutes = require("express").Router();
 const userData = require("../user-data");
 const bcrypt = require('bcrypt');
+const jwtLib = require("../libs/jwt");
+const authMiddleware = require("../middlewares/authMiddleware");
 authRoutes.post("/login", (req, res) => {
     const { username, password } = req.body || {};
 
@@ -15,7 +17,14 @@ authRoutes.post("/login", (req, res) => {
         return res.status(401).send({ message: "User or password incorrect" });
     }
 
-    return res.status(200).send({ message: "Login successful" });
+    return res.status(200).send({ reuslt: jwtLib.generateToken(foundUser.id), message: "Login successful" });
+})
+
+authRoutes.get("/profile", authMiddleware, (req, res) => {
+    loginId = req.userId;
+    console.log("userId",loginId);
+    const foundUser = userData.find((user) => user.id === loginId);
+    return res.status(200).send({ result: foundUser, message: "found user" });  
 })
 
 module.exports = authRoutes

@@ -1,6 +1,7 @@
 const userRoutes = require("express").Router();
 const userData = require("../user-data");
-
+const jwtLib = require("../libs/jwt");
+const authMiddleware = require("../middlewares/authMiddleware");
 class Response {
   constructor(response) {
     this.res = response;
@@ -30,26 +31,7 @@ class Response {
   }
 }
 
-const authMiddleware = (req, res, next) => {
-  console.log("Executing authMiddleware");
-  // protec this route only for logged in users
-  // header "Authorization": "Bearer dfdsffdfddfsdkfjdsjfdsjlkfdsf"
-  let authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).send({ message: "Not login" });
-  }
-  if (!authHeader.startsWith("Bearer ")) {
-    return res.status(401).send({ message: "Bad header" });
-  }
-  const token = authHeader.split(" ")[1];
-  if (token) {
-    // verify token
-    // if token is valid, continue
-    if (token === "mytoken") {
-      return next();
-    } else return res.status(401).send({ message: "Invalid token" });
-  }
-}
+
 
 
 userRoutes.get("/", authMiddleware, (req, res) => {
