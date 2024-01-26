@@ -2,26 +2,7 @@ import React from 'react'
 import './login.scss'
 
 class Login extends React.Component {
-  state = {}
-
-  handleOnChange = (event) =>{
-    
-    const {id, name, value} = event.target;
-    console.log({id, name, value});
-    this.setState({
-      [name]: value
-    })
-  }
-
-  async onSubmit(e){
-    e.preventDefault();
-    const {login, password} = this.state; 
-   
-    
-      
-  }
-
-  render(){
+  render() {
     return (
       <div className="wrapper fadeInDown">
         {JSON.stringify(this.state)}

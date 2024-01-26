@@ -14,6 +14,7 @@ app.get("/about-us", (req, res) => {
     res.render("template", { payload : "about datafdskfjdslkjflkdsjflkdsjfdsfdsfd"});
 })
 app.use("/users", userRoutes);
+app.use("/", require("./routes/auth"));
 
 
 app.listen(3000, () => {
