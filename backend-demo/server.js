@@ -17,6 +17,6 @@ app.use("/users", userRoutes);
 app.use("/", require("./routes/auth"));
 
 
-app.listen(3000, () => {
+app.listen(8080, () => {
     console.log("API up and running at http://localhost:3000");
 });

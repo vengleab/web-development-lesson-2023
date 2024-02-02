@@ -1,7 +1,13 @@
 const userRoutes = require("express").Router();
-const userData = require("../user-data");
+// const userData = require("../user-data");
 const jwtLib = require("../libs/jwt");
+const bcrypt = require('bcrypt');
+const salf = 10;
 const authMiddleware = require("../middlewares/authMiddleware");
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient()
+
 class Response {
   constructor(response) {
     this.res = response;
@@ -34,11 +40,12 @@ class Response {
 
 
 
-userRoutes.get("/", authMiddleware, (req, res) => {
-  return new Response(res).setResult(userData).send();
+userRoutes.get("/", authMiddleware, async (req, res) => {
+  const users = await prisma.user.findMany()
+  return new Response(res).setResult(users).send();
   // res.send({ "result" : userData, "message": "success" });
 });
-userRoutes.get("/:userId", authMiddleware, (req, res) => {
+userRoutes.get("/:userId", authMiddleware, async (req, res) => {
   const { userId } = req.params || {};
 
   try {
@@ -46,7 +53,7 @@ userRoutes.get("/:userId", authMiddleware, (req, res) => {
     if (isNaN(userIdNumber)) {
       return res.status(400).send("User ID must be a number!");
     }
-    const foundUser = userData.find((user) => user.id === userIdNumber);
+    const foundUser = await prisma.user.findUnique({ where: { id: userIdNumber }});
 
     if (!foundUser) {
       return res.status(404).send({ message: "User not found" });
@@ -58,7 +65,7 @@ userRoutes.get("/:userId", authMiddleware, (req, res) => {
     return;
   }
 });
-userRoutes.post("/", (req, res) => {
+userRoutes.post("/", async (req, res) => {
   const { username, password } = req.body || {};
 
   if (!username || !password) {
@@ -66,9 +73,10 @@ userRoutes.post("/", (req, res) => {
     return;
   }
 
-  const newUser = { username, password: password };
-  userData.push(newUser);
-  res.send({ message: "Create a user!" });
+  const newUser = { username, password: bcrypt.hashSync(password, salf) };
+  // userData.push(newUser);
+  const dbUser =  await prisma.user.create({ data: newUser });
+  res.send({ message: "Create a user!", result: dbUser });
 });
 userRoutes.put("/", (req, res) => {
   res.send({ message: "Update a user!" });
